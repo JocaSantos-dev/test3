@@ -1,0 +1,22 @@
+name: Release
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  get-version:
+    name: Get Version
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+    outputs:
+      version: ${{ steps.get_tag.outputs.new_tag }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          fetch-depth: 0
+          persist-credentials: false
